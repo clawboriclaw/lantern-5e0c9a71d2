@@ -19,7 +19,7 @@
 
 :root{
  --bg:#0c0b10;--surface:#14121a;--surface-2:#1d1a25;--border:#2b2733;--border-strong:#6f6a7d;
- --text:#ece9f2;--muted:#b8b2c4;--accent:#ff5aa8;
+ --text:#ece9f2;--muted:#b8b2c4;--quiet:#e0dce8;--accent:#ff5aa8;
  --buy:#5cff3a;--sell:#ec305a;--up:#c6ff00;--dn:#ff00b8;--line:#2de2c8;--amber:#f2b84b;
  --neon-teal:#2de2c8;--neon-lime:#c6ff00;--neon-pink:#ff2fb4;--neon-mari:#ff9f1c;
  --sans:'PlexSans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;--mono:'PlexMono',ui-monospace,Menlo,monospace;
@@ -75,17 +75,18 @@ canvas{display:block;width:100%;height:100%;touch-action:pan-y}
 .tfl{list-style:none;margin:0;padding:0}
 .tfl li{display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px solid var(--border);font-size:14px}
 .tfl li:first-child{border-top:0}
-.tfl li{flex-wrap:wrap;row-gap:2px}.tfl .zn{flex:1 0 100%;padding-left:86px;white-space:nowrap;font-size:13px;color:var(--muted)}.tfl .zn.z2{color:var(--text)}.tfl .zn.z3{color:var(--buy);font-weight:600}
+.tfl li{flex-wrap:wrap;row-gap:2px}.tfl .zn{flex:1 0 100%;padding-left:86px;white-space:nowrap;font-size:13px;color:var(--quiet)}.tfl .zn.z2{color:var(--text)}.tfl .zn.z3{color:var(--buy);font-weight:600}
 .subk{display:inline-flex;align-items:center;gap:6px;min-height:32px;padding:0 10px;border:1px solid var(--border);border-radius:16px;background:none;color:var(--muted);font:inherit;font-size:12px;cursor:pointer}.subk[aria-pressed=true]{color:var(--text);border-color:var(--neon-mari)}
 i.ring{display:inline-block;width:10px;height:10px;border:2px solid var(--neon-mari);border-radius:50%;background:none;box-sizing:border-box;flex:0 0 auto;vertical-align:middle}
 .callout{margin:8px 8px 4px;padding:10px 12px;border:1px solid var(--neon-mari);border-radius:10px;font-size:13px;color:var(--text)}.callout p{margin:0 0 8px}.callout button{min-height:36px;padding:0 14px;border-radius:18px;border:0;background:var(--neon-mari);color:#0c0b10;font:inherit;font-weight:600;cursor:pointer}
 .znote{margin:8px 0 0;font-size:13px;color:var(--muted)}
 .tfl .tfw{flex:0 0 76px;font-weight:500;text-align:left;background:none;border:0;padding:6px 0;cursor:pointer;color:var(--neon-teal);text-decoration:underline;text-underline-offset:3px}
-.tfl li.cur .tfw{color:var(--text);text-decoration:none;cursor:default}
+.tfl li.cur .tfw{font-weight:700}
 .tr{font-family:var(--mono);font-weight:500}.tr.up{color:var(--up)}.tr.dn{color:var(--dn)}
 .sig.buy{color:var(--buy)}.sig.sell{color:var(--sell)}
 h2{margin:0 0 8px;font-size:12px;font-weight:600;color:var(--muted);letter-spacing:.07em;text-transform:uppercase}
-footer{padding:8px 0 32px;color:var(--muted);font-size:12px}
+footer{padding:8px 0 32px;color:var(--quiet);font-size:12px}
+.asof{position:absolute;z-index:1;left:8px;top:6px;margin:0;pointer-events:none;font:600 13px/1.35 var(--sans);color:var(--quiet);text-shadow:0 1px 2px #0c0b10,0 0 6px #0c0b10}
 .err{padding:40px 0;text-align:center;color:var(--muted)}
 .brandrow{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 /* the "Decaf" sign (owner pick 2026-10-04): a pink neon tube — crisp core, wide soft glow, a slow flicker (off under reduced motion) */
@@ -129,7 +130,7 @@ footer{padding:8px 0 32px;color:var(--muted);font-size:12px}
 @media (max-width:600px){header{flex-wrap:wrap}.tag{text-align:left;flex:1 1 100%}.head{font-size:19px}.chartwrap{height:46vh}}
 @media (min-width:900px){.grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:12px;align-items:start}}
 .gate{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:radial-gradient(60% 50% at 50% 42%,color-mix(in srgb,var(--neon-teal) 9%,var(--bg)) 0%,var(--bg) 70%);transition:opacity .45s ease,visibility .45s}
-.gate.out{opacity:0;visibility:hidden}.gated{overflow:hidden}
+.gate.out{opacity:0;visibility:hidden;pointer-events:none}.gated{overflow:hidden}
 .gate-in{display:flex;flex-direction:column;align-items:center;text-align:center;padding:24px}
 .gate-logo{justify-content:center;zoom:2.6}
 .gate-wit{margin:34px 0 34px;font-size:21px;color:var(--text);letter-spacing:.01em}
@@ -155,12 +156,12 @@ footer{padding:8px 0 32px;color:var(--muted);font-size:12px}
  <div class="brandrow gate-logo"><div class="brand">Sin<i>Cara</i><svg class="brand-face" viewBox="22 12 156 176" role="img" aria-label="SinCara calavera logo"><defs><filter id="sc-glow" filterUnits="userSpaceOnUse" x="-12" y="-12" width="224" height="224"><feGaussianBlur in="SourceGraphic" stdDeviation="2.2"/><feComponentTransfer><feFuncA type="linear" slope=".55"/></feComponentTransfer><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g transform="translate(0 1.5)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g class="sk" filter="url(#sc-glow)"><path stroke-width="4.2" d="M100 40C54 40 28 70 28 106C28 128 40 144 58 151V168C58 176 63 181 71 181H129C137 181 142 176 142 168V151C160 144 172 128 172 106C172 70 146 40 100 40Z"/></g><g class="cr" filter="url(#sc-glow)"><path stroke-width="3.2" d="M70 34q6-12 0-14q-6 2 0 14M85 34q6-12 0-14q-6 2 0 14M100 34q-6-15 0-17q6 2 0 17M115 34q-6-12 0-14q6 2 0 14M130 34q-6-12 0-14q6 2 0 14M100 131C96 137 96 140 100 144C104 140 104 137 100 131Z"/></g><g class="ck" filter="url(#sc-glow)"><path stroke-width="3.2" d="M48 132q5-9 12-2q-3 5-8 2M152 132q-5-9-12-2q3 5 8 2"/><path stroke-width="3.2" d="M78 159Q100 170 122 159M89 158.5v10M100 160v10M111 158.5v10"/></g><g class="ey1" filter="url(#sc-glow)"><text x="71" y="125" font-size="54">S</text><path stroke-width="3.2" d="M73 84V130"/></g><g class="ey2" filter="url(#sc-glow)"><text x="129" y="125" font-size="56">C</text><path stroke-width="3.2" d="M128 84V130"/></g></g></svg></div><span class="neon" role="img" aria-label="Decaf"><span class="neon-t">Decaf</span></span></div>
  <p class="gate-wit">All the signals, none of the jitters.</p>
  <button type="button" class="gate-go" id="gateGo">Enter</button>
- <p class="gate-nfa">NFA · DYOR — not financial advice, do your own research.</p>
+ <p class="gate-nfa">NFA · DYOR — not financial advice, do your own research, homie.</p>
 </div></div>
 <div class="wrap">
 <header>
  <div class="brandrow"><h1 class="brand">Sin<i>Cara</i><svg class="brand-face" viewBox="22 12 156 176" role="img" aria-label="SinCara calavera logo"><defs><filter id="sc-glow" filterUnits="userSpaceOnUse" x="-12" y="-12" width="224" height="224"><feGaussianBlur in="SourceGraphic" stdDeviation="2.2"/><feComponentTransfer><feFuncA type="linear" slope=".55"/></feComponentTransfer><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g transform="translate(0 1.5)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g class="sk" filter="url(#sc-glow)"><path stroke-width="4.2" d="M100 40C54 40 28 70 28 106C28 128 40 144 58 151V168C58 176 63 181 71 181H129C137 181 142 176 142 168V151C160 144 172 128 172 106C172 70 146 40 100 40Z"/></g><g class="cr" filter="url(#sc-glow)"><path stroke-width="3.2" d="M70 34q6-12 0-14q-6 2 0 14M85 34q6-12 0-14q-6 2 0 14M100 34q-6-15 0-17q6 2 0 17M115 34q-6-12 0-14q6 2 0 14M130 34q-6-12 0-14q6 2 0 14M100 131C96 137 96 140 100 144C104 140 104 137 100 131Z"/></g><g class="ck" filter="url(#sc-glow)"><path stroke-width="3.2" d="M48 132q5-9 12-2q-3 5-8 2M152 132q-5-9-12-2q3 5 8 2"/><path stroke-width="3.2" d="M78 159Q100 170 122 159M89 158.5v10M100 160v10M111 158.5v10"/></g><g class="ey1" filter="url(#sc-glow)"><text x="71" y="125" font-size="54">S</text><path stroke-width="3.2" d="M73 84V130"/></g><g class="ey2" filter="url(#sc-glow)"><text x="129" y="125" font-size="56">C</text><path stroke-width="3.2" d="M128 84V130"/></g></g></svg></h1><span class="neon" role="img" aria-label="Decaf"><span class="neon-t">Decaf</span></span></div>
- <p class="tag"><span class="wit">All the signals, none of the jitters.</span><br><b class="nfa">NFA · DYOR</b> — not financial advice, do your own research, suckas.</p>
+ <p class="tag"><span class="wit">All the signals, none of the jitters.</span><br><b class="nfa">NFA · DYOR</b> — not financial advice, do your own research, homie.</p>
 </header>
 <div class="pickbar"><button type="button" class="assetbtn" id="assetBtn" aria-haspopup="dialog" aria-expanded="false" aria-controls="apick"><span class="ab-k">Asset</span><span class="ab-sym" id="abSym">—</span><span class="ab-name" id="abName"></span><span class="ab-car" aria-hidden="true">▾</span></button>
 <div class="tfs" id="tfs" role="group" aria-label="Pick a timeframe"></div></div>
@@ -198,7 +199,10 @@ footer{padding:8px 0 32px;color:var(--muted);font-size:12px}
   tip.querySelector('.tour-next').onclick=()=>go(1);const b=tip.querySelector('.tour-back');if(b)b.onclick=()=>go(-1);const k=tip.querySelector('.tour-skip');if(k)k.onclick=end;
   if(t){t.scrollIntoView({block:st.up?'start':'center',behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'});setTimeout(place,380)}place();tip.querySelector('.tour-next').focus({preventScroll:true})}
  function go(d){i+=d;if(i>=STEPS.length)return end();if(i<0)i=0;show()}
- window.startTour=function(){if(tip)return;const ready=()=>document.querySelector('#main .chartcard');let n=0;(function wait(){if(!ready()&&n++<40)return setTimeout(wait,150);
+ let tourGen=0,autoTimer=0;
+ window.cancelAutoTour=function(){tourGen++;if(autoTimer){clearTimeout(autoTimer);autoTimer=0}};
+ window.armAutoTour=function(){const my=tourGen;autoTimer=setTimeout(()=>{autoTimer=0;if(my!==tourGen)return;window.startTour()},520)};
+ window.startTour=function(){if(tip)return;const my=tourGen,ready=()=>document.querySelector('#main .chartcard');let n=0;(function wait(){if(my!==tourGen)return;if(!ready()&&n++<40)return setTimeout(wait,150);if(my!==tourGen||tip)return;
   i=0;try{localStorage.setItem('sf.subseen','1')}catch(e){}const sc=document.getElementById('subcall');if(sc)sc.remove();spot=document.createElement('div');spot.className='tour-spot';tip=document.createElement('div');tip.className='tour-tip';tip.setAttribute('role','dialog');tip.setAttribute('aria-label','Quick tour');
   document.body.append(spot,tip);document.addEventListener('keydown',key);window.addEventListener('resize',place);show()})()};
  document.addEventListener('click',e=>{if(e.target.closest&&e.target.closest('#tourAgain'))window.startTour()});
@@ -207,7 +211,7 @@ footer{padding:8px 0 32px;color:var(--muted);font-size:12px}
 (function(){/* welcome page: first visit, or back after 30+ days away (owner 2026-10-05) — every visit refreshes the clock */
  const g=document.getElementById('gate'),now=Date.now(),D30=30*864e5;let last=0;try{last=+localStorage.getItem('sf.lastvisit')||0;localStorage.setItem('sf.lastvisit',String(now))}catch(e){}
  if(last&&now-last<D30){g.remove();return}document.documentElement.classList.add('gated');const b=document.getElementById('gateGo');setTimeout(()=>b.focus(),50);
- b.addEventListener('click',()=>{let t=null;try{t=localStorage.getItem('sf.toured')}catch(e){}if(!t)setTimeout(()=>window.startTour&&window.startTour(),520);g.classList.add('out');document.documentElement.classList.remove('gated');setTimeout(()=>g.remove(),500)})})();
+ b.addEventListener('click',()=>{let t=null;try{t=localStorage.getItem('sf.toured')}catch(e){}g.style.pointerEvents='none';document.documentElement.classList.remove('gated');g.remove();if(!t&&window.armAutoTour)window.armAutoTour()})})();
 
 'use strict';
 const TFS=['1h','4h','1D','1W','1M'],TFW={'1h':'1-hour','4h':'4-hour','1D':'Daily','1W':'Weekly','1M':'Monthly'};
@@ -226,6 +230,7 @@ function ageText(ms,T){const s=Math.max(0,Math.round(ms/1000));if(s<45)return 'j
  const h=Math.floor(m/60),rm=m%60;if(h<24)return h+'h'+(rm?' '+rm+'m':'')+' ago';return dayWords(Math.floor(h/24),T)}
 function whenUTC(ms){const d=new Date(ms),day=new Intl.DateTimeFormat('en-US',{month:'short',day:'2-digit',timeZone:'UTC'}).format(d),yr=d.getUTCFullYear(),
  base=yr===new Date().getUTCFullYear()?day:day+', '+yr;return (d.getUTCHours()||d.getUTCMinutes())?base+' '+String(d.getUTCHours()).padStart(2,'0')+':'+String(d.getUTCMinutes()).padStart(2,'0')+' UTC':base}
+function finishedMs(D){const n=D.c.length-(D.forming?1:0);return n>0?D.t[n-1]*1000:null}
 function size(p){const a=Math.abs(p);return a<.5?'tiny':a<2?'small':a<5?'big':'huge'}
 function back(ms,k,u){if(u==='d')return ms-k*864e5;const d=new Date(ms),y=d.getUTCFullYear(),m=d.getUTCMonth()-k;
  return Date.UTC(y,m,Math.min(d.getUTCDate(),new Date(Date.UTC(y,m+1,0)).getUTCDate()))+ms%864e5}
@@ -281,10 +286,10 @@ function renderTfs(){const e=IDX.symbols[SYM];$('#tfs').innerHTML=TFS.filter(t=>
 /* ---- the page ---- */
 let SUB=store.get('sf.sub')!=='0';
 const ZW=['far from a buy','far from a buy','getting close','in the buy zone'];
-function render(){const e=IDX.symbols[SYM],A=e.about,M=model(D,A);
+function render(){const e=IDX.symbols[SYM],A=e.about,M=model(D,A),fin=finishedMs(D),finLab=fin?whenUTC(fin):'—';
  const L=([k,t],nl)=>`<div class="el"><i class="${M.mk[k]||''}"></i><span>${nl?'':`<b>${k}:</b> `}${t}</span></div>`;
  const tfRows=TFS.filter(t=>e.tfs[t]).map(t=>{const s=e.tfs[t],cur=t===TF,l=s.last;
-  return `<li${cur?' class="cur"':''}>${cur?`<span class="tfw">${TFW[t]}</span>`:`<button type="button" class="tfw" data-tf="${t}">${TFW[t]}</button>`}`
+  return `<li${cur?' class="cur"':''}><button type="button" class="tfw" data-tf="${t}"${cur?' aria-current="true"':''}>${TFW[t]}</button>`
    +`<span class="tr ${s.trend==='up'?'up':s.trend==='down'?'dn':''}">${s.trend?s.trend.toUpperCase():'—'}</span>`
    +`<span>${l?`<span class="sig ${l.k}">${l.k==='buy'?'Buy':'Sell'}</span> · ${ageText(Date.now()-l.t*1000,t)}`:'no signal yet'}</span>`
    +(s.zone==null?'':`<span class="zn z${s.zone}" title="How close this timeframe is to a buy">${'●'.repeat(s.zone)}${'○'.repeat(3-s.zone)} ${ZW[s.zone]}</span>`)+`</li>`}).join('');
@@ -293,7 +298,7 @@ function render(){const e=IDX.symbols[SYM],A=e.about,M=model(D,A);
    <div>${M.main.map(r=>L(r,1)).join('')}</div>
    ${A?`<div class="el"><i></i><span><b>About ${esc(A.name)}:</b> ${esc(A.what)}</span></div>`:''}
    <details id="more"${MORE?' open':''}><summary>More</summary>${M.rows.map(r=>L(r)).join('')}</details></section>
-  <section class="card chartcard"><div class="chartwrap"><canvas id="cv" aria-label="${esc(SYM)} ${TFW[TF]} price with buy and sell signals and the trend"></canvas><div class="tip" id="tip"></div></div>
+  <section class="card chartcard"><div class="chartwrap"><canvas id="cv" aria-label="${esc(SYM)} ${TFW[TF]} price with buy and sell signals and the trend"></canvas><p class="asof">Last finished candle · ${esc(finLab)}</p><div class="tip" id="tip"></div></div>
    <div class="key"><span><i class="sw ln" style="background:var(--line)"></i>Price (close)</span><span><i class="sw" style="background:var(--buy)"></i>BUY</span><span><i class="sw" style="background:var(--sell)"></i>SELL</span>
    <span><i class="sw bd" style="background:color-mix(in srgb,var(--up) 22%,transparent);border-top:2px solid var(--up)"></i>S-Trend up</span><span><i class="sw bd" style="background:color-mix(in srgb,var(--dn) 22%,transparent);border-top:2px solid var(--dn)"></i>S-Trend down</span>${D.sub_tf?`<button type="button" class="subk" id="subk" aria-pressed="${SUB}" title="Show or hide the ${TFW[D.sub_tf]} chart's buys"><i class="ring"></i>${TFW[D.sub_tf]} buy</button>`:''}</div>
    ${D.sub_tf&&store.get('sf.subseen')!=='1'?`<div class="callout" id="subcall"><p><b>New:</b> the hollow orange rings <i class="ring"></i> mark where the <b>${TFW[D.sub_tf]}</b> chart fired a buy. They are not ${TFW[TF]} buys: a shorter chart catches short dips that the ${TFW[TF]} chart is too slow to flag, so the two rarely line up. That is normal, not an error. Tap “${TFW[D.sub_tf]} buy” in the key above to hide or show them.</p><button type="button" id="subok">Got it</button></div>`:''}</section>
@@ -309,7 +314,7 @@ function render(){const e=IDX.symbols[SYM],A=e.about,M=model(D,A);
  $('#more').addEventListener('toggle',ev=>{MORE=ev.target.open});
  const sk=$('#subk');if(sk)sk.addEventListener('click',()=>{SUB=!SUB;store.set('sf.sub',SUB?'1':'0');sk.setAttribute('aria-pressed',SUB);draw()});
  const so=$('#subok');if(so)so.addEventListener('click',()=>{store.set('sf.subseen','1');$('#subcall').remove()});
- $('#foot').textContent='Data updated '+ageText(Date.now()-Date.parse(D.generated_utc))+' · prices in '+D.quote+' · signals on finished candles only · NFA · DYOR';
+ $('#foot').textContent='Last candle '+finLab+' · Data updated '+ageText(Date.now()-Date.parse(D.generated_utc))+' · prices in '+D.quote+' · signals on finished candles only · NFA · DYOR';
  draw()}
 
 function draw(){const cv=$('#cv');if(!cv||!D)return;const r=cv.getBoundingClientRect(),dpr=window.devicePixelRatio||1;cv.width=r.width*dpr;cv.height=r.height*dpr;
@@ -326,9 +331,9 @@ function draw(){const cv=$('#cv');if(!cv||!D)return;const r=cv.getBoundingClient
    g.fillStyle=d===1?C('--up'):C('--dn');g.fillRect(x0,H-padB,x1-x0,3)}i=j+1}
  // grid + price labels
  g.font='11px '+C('--mono');g.textBaseline='middle';g.textAlign='left';
- for(let k=0;k<=4;k++){const v=lo+(hi-lo)*(k+.5)/5,y=Y(v);g.strokeStyle='#1b1a22';g.lineWidth=1;g.beginPath();g.moveTo(0,y);g.lineTo(W-padR+4,y);g.stroke();if(Math.abs(y-Y(D.c[n-1]))>14){g.fillStyle=C('--muted');g.fillText(fmtP(v),W-padR+8,y)}}
+ for(let k=0;k<=4;k++){const v=lo+(hi-lo)*(k+.5)/5,y=Y(v);g.strokeStyle='#1b1a22';g.lineWidth=1;g.beginPath();g.moveTo(0,y);g.lineTo(W-padR+4,y);g.stroke();if(Math.abs(y-Y(D.c[n-1]))>14){g.fillStyle=C('--quiet');g.fillText(fmtP(v),W-padR+8,y)}}
  // date labels
- g.textAlign='center';g.textBaseline='alphabetic';g.fillStyle=C('--muted');const step=Math.max(1,Math.ceil(n/Math.max(2,Math.floor((W-padR)/110))));
+ g.textAlign='center';g.textBaseline='alphabetic';g.fillStyle=C('--quiet');const step=Math.max(1,Math.ceil(n/Math.max(2,Math.floor((W-padR)/110))));
  for(let i=0;i<n;i+=step){const d=new Date(D.t[i]*1000);const lab=new Intl.DateTimeFormat('en-US',D.timeframe==='1M'||D.timeframe==='1W'?{month:'short',year:'2-digit',timeZone:'UTC'}:{month:'short',day:'numeric',timeZone:'UTC'}).format(d),lw=g.measureText(lab).width/2;
   g.fillText(lab,Math.max(lw+2,Math.min(W-padR-lw,X(i))),H-6)}
  // price line
@@ -354,7 +359,7 @@ function load(sym,tf,push){const e=IDX.symbols[sym];if(!e)return;if(!e.tfs[tf])t
  if(push)history.replaceState(null,'','#'+sym+'/'+tf);renderPicker();renderTfs();
  fetch('data/'+sym+'_'+tf+'.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw 0;return r.json()}).then(d=>{if(sym!==SYM||tf!==TF)return;D=d;render()})
   .catch(()=>{$('#main').innerHTML='<p class="err">That chart could not be loaded. Try again in a minute.</p>'})}
-document.addEventListener('click',ev=>{const b=ev.target.closest('[data-sym],[data-tf]');if(!b)return;if(b.dataset.sym){load(b.dataset.sym,TF,true);apClose()}else load(SYM,b.dataset.tf,true)});
+document.addEventListener('click',ev=>{const b=ev.target.closest('[data-sym],[data-tf]');if(!b)return;if(window.cancelAutoTour)window.cancelAutoTour();if(b.dataset.sym){load(b.dataset.sym,TF,true);apClose()}else load(SYM,b.dataset.tf,true)});
 document.addEventListener('mousemove',ev=>{if(ev.target.id==='cv')hover(ev);else if($('#tip'))$('#tip').style.display='none'});
 document.addEventListener('touchstart',ev=>{if(ev.target.id==='cv')hover(ev)},{passive:true});
 let rz;window.addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(draw,120)});
